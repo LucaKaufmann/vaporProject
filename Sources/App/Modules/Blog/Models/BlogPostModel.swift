@@ -8,22 +8,22 @@ final class BlogPostModel: Model {
     struct FieldKeys {
         static var title: FieldKey { "title" }
         static var slug: FieldKey { "slug" }
+        static var imageKey: FieldKey { "image_key" }
         static var image: FieldKey { "image" }
         static var excerpt: FieldKey { "excerpt" }
         static var date: FieldKey { "date" }
         static var content: FieldKey { "content" }
         static var categoryId: FieldKey { "category_id" }
-        static var imageKey: FieldKey { "image_key" }
     }
     
     @ID() var id: UUID?
     @Field(key: FieldKeys.title) var title: String
     @Field(key: FieldKeys.slug) var slug: String
+    @Field(key: FieldKeys.imageKey) var imageKey: String?
     @Field(key: FieldKeys.image) var image: String
     @Field(key: FieldKeys.excerpt) var excerpt: String
     @Field(key: FieldKeys.date) var date: Date
     @Field(key: FieldKeys.content) var content: String
-    @Field(key: FieldKeys.imageKey) var imageKey: String?
     @Parent(key: FieldKeys.categoryId) var category: BlogCategoryModel
 
     init() { }
@@ -41,8 +41,8 @@ final class BlogPostModel: Model {
         self.id = id
         self.title = title
         self.slug = slug
-        self.image = image
         self.imageKey = imageKey
+        self.image = image
         self.excerpt = excerpt
         self.date = date
         self.content = content
@@ -50,7 +50,7 @@ final class BlogPostModel: Model {
     }
 }
 
-extension BlogPostModel {
+extension BlogPostModel: ViewContextRepresentable {
 
     struct ViewContext: Encodable {
         var id: String
@@ -73,4 +73,5 @@ extension BlogPostModel {
     }
 
     var viewContext: ViewContext { .init(model: self) }
+    var viewIdentifier: String { self.id!.uuidString }
 }
