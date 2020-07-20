@@ -4,6 +4,11 @@ import FluentSQLiteDriver
 import Vapor
 import Liquid
 import LiquidLocalDriver
+import FluentPostgresDriver
+
+extension Environment {
+    static let pgUrl = URL(string: Self.get("DB_URL")!)!
+}
 
 public func configure(_ app: Application) throws {
 
