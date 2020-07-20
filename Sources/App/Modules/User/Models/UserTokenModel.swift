@@ -7,9 +7,13 @@
 
 import Vapor
 import Fluent
+import ContentApi
+import ViperKit
 
-final class UserTokenModel: Model {
-    static let schema = "user_tokens"
+final class UserTokenModel: ViperModel {
+    typealias Module = UserModule
+    
+    static let name = "tokens"
     
     struct FieldKeys {
         static var value: FieldKey { "value" }

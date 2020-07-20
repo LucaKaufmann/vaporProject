@@ -8,6 +8,7 @@
 
 import Vapor
 import Fluent
+import ContentApi
 
 struct UserApiController {
     

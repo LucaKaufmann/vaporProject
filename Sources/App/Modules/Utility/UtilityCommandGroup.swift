@@ -21,6 +21,7 @@ struct UtilityCommandGroup: CommandGroup {
 
         self.commands = [
             UtilityFileTransferCommand.name: UtilityFileTransferCommand(),
+            UtilityDatabaseTransferCommand.name: UtilityDatabaseTransferCommand()
         ]
     }
 }

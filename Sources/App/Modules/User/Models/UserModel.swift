@@ -1,9 +1,12 @@
 import Vapor
 import Fluent
+import ViperKit
 
-final class UserModel: Model {
+final class UserModel: ViperModel {
         
-    static let schema = "user_users"
+    typealias Module = UserModule
+        
+    static let name = "users"
 
     struct FieldKeys {
         static var email: FieldKey { "email" }
